@@ -3,10 +3,13 @@ import dayjs from 'dayjs';
 import React from 'react';
 import Button from './Button';
 
-export default function AddMode(){
+type addModeProps ={
+  tasks: string
+  setTasks : React.Dispatch<any>
+}
+export default function AddMode({tasks,setTasks}:addModeProps){
   
   const [isClicked , setIsClick] = React.useState(false)
-  const [task,setTask]= React.useState(JSON.parse(localStorage.getItem('task') || '[]'))
   const [taskValue,setTaskValue] = React.useState('')
   const [taskDescriptionValue,settaskDescriptionValue] = React.useState('')
 
@@ -21,14 +24,14 @@ function isValue() {
     if(!isValue()){
       return
   }
-    const newTask = [...task, {
+    const newTasks = [...tasks, {
       task:taskValue,
       descrption : taskDescriptionValue,
       id : crypto.randomUUID(),
       date: dayjs(),
     }]
-    setTask(newTask)
-    saveToStorage('task',newTask)
+    setTasks(newTasks)
+    saveToStorage('tasks',newTasks)
     handleToggle()
     setTaskValue('')
     settaskDescriptionValue('')

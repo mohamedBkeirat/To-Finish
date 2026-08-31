@@ -1,7 +1,6 @@
-import { render } from '@testing-library/react';
-import { expect, it, describe,beforeEach } from 'vitest'
+import { expect, it, describe, beforeEach } from 'vitest'
+import { screen, render } from '@testing-library/react';
 import MainHeader from './MainHeader'
-import { screen, fireEvent } from '@testing-library/react';
 
 describe('MainHeader', () => {
 

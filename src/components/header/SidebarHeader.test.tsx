@@ -1,7 +1,6 @@
-import { render } from '@testing-library/react';
-import { expect, it, describe,beforeEach } from 'vitest'
+import { expect, it, describe, beforeEach } from 'vitest'
+import { screen, render } from '@testing-library/react';
 import SidebarHeader from './SidebarHeader';
-import { screen } from '@testing-library/react';
 
 describe(('test suite:SidebarHeader'),()=>{
 
