@@ -1,4 +1,4 @@
-import saveToStorage from '../utils/save-to-storage'
+import saveToStorage from '../utils/saveToStorage'
 import dayjs from 'dayjs';
 import React from 'react';
 import Button from './Button';
