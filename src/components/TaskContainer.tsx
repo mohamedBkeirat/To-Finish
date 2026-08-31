@@ -1,4 +1,5 @@
 import Button from "./Button";
+import React from "react";
 
 import type { ReactNode } from "react";
 
@@ -8,13 +9,21 @@ type TaskContainerProps = {
 };
 
 export default function TaskContainer({
-  children,onDelete
+  
+  children,onDelete,
 }: TaskContainerProps) {
-  return (
-    <div className="task-container hover-mode">
-      <input type="checkbox" className="h-[15px] w-[15px]" />
 
-      <p className="ml-[5px] text-[18px]">
+  const [isActive,setisActive] = React.useState(false)
+
+  function toggleClick(){
+    setisActive(!isActive)
+  }
+
+  return (
+    <div className={"task-container hover-mode"}>
+      <input onClick={toggleClick} type="checkbox" className="h-[15px] w-[15px]" />
+
+      <p className={`ml-[5px] text-[18px] ${isActive && 'line-through '}`}>
         {children}
       </p>
 
