@@ -29,6 +29,7 @@ function isValue() {
       descrption : taskDescriptionValue,
       id : crypto.randomUUID(),
       date: dayjs(),
+      isClicked:false
     }]
     setTasks(newTasks)
     saveToStorage('tasks',newTasks)

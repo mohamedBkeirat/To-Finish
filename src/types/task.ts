@@ -5,4 +5,5 @@ export type Task = {
   description: string;
   id: string;
   date: Dayjs;
+  isChecked:boolean
 };
