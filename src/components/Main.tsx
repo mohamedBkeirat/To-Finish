@@ -1,14 +1,15 @@
 import TaskContainer from './TaskContainer';
 import type { Task } from "../types/task";
 import React from 'react';
+import formatDate from '../utils/formatDate'
+import type { Dispatch, SetStateAction } from "react";
 
 type MainProps = {
   tasks: Task[];
-	setTasks: React.Dispatch<any>
+	setTasks: Dispatch<SetStateAction<Task[]>>
 };
 
 export default function Main({tasks,setTasks}:MainProps){
-
 	function isAnyChecked(): boolean{
 
 	const currentTask = tasks.find(task=>task.isChecked === true)
@@ -26,6 +27,7 @@ export default function Main({tasks,setTasks}:MainProps){
 					setTasks={setTasks}
 					key={task.id}
 					taskId={task.id}
+					date={formatDate(task.date)}
 					>
 						{task.task}
 					</TaskContainer>
@@ -38,6 +40,7 @@ export default function Main({tasks,setTasks}:MainProps){
 					setTasks={setTasks}
 					key={task.id}
 					taskId={task.id}
+					date={formatDate(task.date)}
 					>
 						{task.task}
 					</TaskContainer>

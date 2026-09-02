@@ -2,10 +2,13 @@ import saveToStorage from '../utils/saveToStorage'
 import dayjs from 'dayjs';
 import React from 'react';
 import Button from './Button';
+import type { Dispatch, SetStateAction } from "react";
+import type { Task } from '../types/task';
+
 
 type addModeProps ={
-  tasks: string
-  setTasks : React.Dispatch<any>
+  tasks: Task[]
+  setTasks : Dispatch<SetStateAction<Task[]>>
 }
 export default function AddMode({tasks,setTasks}:addModeProps){
   
@@ -24,12 +27,12 @@ function isValue() {
     if(!isValue()){
       return
   }
-    const newTasks = [...tasks, {
-      task:taskValue,
-      descrption : taskDescriptionValue,
-      id : crypto.randomUUID(),
+    const newTasks:Task[] = [...tasks, {
+      task: taskValue,
+      description: taskDescriptionValue,
+      id: crypto.randomUUID(),
       date: dayjs(),
-      isClicked:false
+      isChecked:false
     }]
     setTasks(newTasks)
     saveToStorage('tasks',newTasks)
@@ -43,6 +46,7 @@ function isValue() {
       <div className="blur-container">
         <div className='add-container'>
           <textarea 
+          onKeyDown={e=> {if(e.key === 'Enter'){addTask()}}}
           value={taskValue}
           onChange={(e)=>{setTaskValue(e.target.value)}}
           placeholder='Task'

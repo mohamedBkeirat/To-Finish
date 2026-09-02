@@ -1,12 +1,12 @@
 import Button from "./Button";
 import type { Task } from "../types/task";
 import saveToStorage from '../utils/saveToStorage';
-import type { ReactNode } from "react";
+import type { Dispatch, ReactNode, SetStateAction } from "react";
 
 type TaskContainerProps = {
   children: ReactNode;
   tasks: Task[];
-  setTasks: React.Dispatch<any>
+  setTasks: Dispatch<SetStateAction<Task[]>>
   taskId:string
   date:string
 };
