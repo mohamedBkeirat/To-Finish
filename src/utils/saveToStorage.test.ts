@@ -1,5 +1,3 @@
-// @vitest-environment jsdom
-
 import saveToStorage from "./saveToStorage";
 import { expect, it, describe, vi } from 'vitest'
 

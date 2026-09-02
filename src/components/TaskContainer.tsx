@@ -8,11 +8,12 @@ type TaskContainerProps = {
   tasks: Task[];
   setTasks: React.Dispatch<any>
   taskId:string
+  date:string
 };
 
 export default function TaskContainer({
   
-  children,tasks,setTasks,taskId
+  children,tasks,setTasks,taskId,date
 }: TaskContainerProps) {
 
   function deleteTask(taskId:string){
@@ -44,15 +45,21 @@ export default function TaskContainer({
     <div className={`task-container hover-mode ${ isChecked(taskId) && ' !bg-yellow-100 '}`}>
       <input onClick={()=>handleCheckState(taskId)} checked={isChecked(taskId)} type="checkbox" className="h-[15px] w-[15px]" />
 
-      <p className={`ml-[5px] max-h-[100px] overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked(taskId) && 'text-gray-600 line-through'}`}>
-        {children}
-      </p>
 
+      <div className="ml-[5px]">
+        <p className={` max-h-[100px]  overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked(taskId) && 'text-gray-600 line-through'}`}>
+          {children}
+        </p>
+        <p className={`text-[10px] text-left ${isChecked(taskId) && 'text-gray-600'}`}>
+          {date}
+        </p>
+      </div>
       <Button
         onClick={()=>deleteTask(taskId)}
         imgSrc="/images/icons/trash.png"
         className="!m-[2px] !ml-auto !h-[35px] !w-[35px] hover-mode active-mode"
       />
+
     </div>
   );
 }
