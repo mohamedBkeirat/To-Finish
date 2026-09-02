@@ -4,7 +4,7 @@ import saveToStorage from '../utils/saveToStorage';
 import type { ReactNode } from "react";
 
 type TaskContainerProps = {
-  children?: ReactNode;
+  children: ReactNode;
   tasks: Task[];
   setTasks: React.Dispatch<any>
   taskId:string
@@ -44,7 +44,7 @@ export default function TaskContainer({
     <div className={`task-container hover-mode ${ isChecked(taskId) && ' !bg-yellow-100 '}`}>
       <input onClick={()=>handleCheckState(taskId)} checked={isChecked(taskId)} type="checkbox" className="h-[15px] w-[15px]" />
 
-      <p className={`ml-[5px] text-[18px] ${ isChecked(taskId) && ' text-gray-600 line-through'}`}>
+      <p className={`ml-[5px] max-h-[100px] overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked(taskId) && 'text-gray-600 line-through'}`}>
         {children}
       </p>
 
