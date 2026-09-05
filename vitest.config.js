@@ -8,5 +8,14 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./setupTests.ts'],
+    coverage: {
+      enabled: true
+    },
+    thresholds: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: -10,
+    },
   },
 });
