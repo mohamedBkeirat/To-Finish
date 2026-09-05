@@ -4,6 +4,6 @@ export type Task = {
   task: string;
   description: string;
   id: string;
-  date: Dayjs;
+  date: Dayjs|string;
   isChecked:boolean
 };
