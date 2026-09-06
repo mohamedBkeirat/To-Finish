@@ -2,19 +2,26 @@ import Button from "./Button";
 import type { Task } from "../types/task";
 import saveToStorage from '../utils/saveToStorage';
 import type { Dispatch, ReactNode, SetStateAction } from "react";
+import dayjs from "dayjs";
+import formatDate from "../utils/formatDate";
 
 type TaskContainerProps = {
   children: ReactNode;
   tasks: Task[];
   setTasks: Dispatch<SetStateAction<Task[]>>
   taskId:string
-  date:string
 };
 
 export default function TaskContainer({
   
-  children,tasks,setTasks,taskId,date
+  children,tasks,setTasks,taskId
 }: TaskContainerProps) {
+
+  const currentTask = tasks.find(task=>task.id === taskId)
+  
+  if (!currentTask) {
+    return null;
+}
 
   function deleteTask(taskId:string){
 
@@ -27,8 +34,15 @@ export default function TaskContainer({
   }
   function handleCheckState(taskId:string){
 
-    const newTasks = tasks.map(task =>
-        task.id === taskId ? { ...task, isChecked: !task.isChecked } : task)
+    const newTasks = tasks.map(task => {
+      if (task.id !== taskId) return task;
+
+      if (task.isChecked) {
+        const { completedDate, ...rest } = task;
+        return { ...rest, isChecked: false };
+      }
+      return { ...task, isChecked: true, completedDate: dayjs() };
+    });
 
     setTasks(newTasks)
 
@@ -36,8 +50,6 @@ export default function TaskContainer({
     
   }
   function isChecked(taskId:string): boolean{
-
-    const currentTask = tasks.find(task=>task.id === taskId)
     return currentTask?.isChecked ?? false
   }
 
@@ -50,9 +62,14 @@ export default function TaskContainer({
         <p className={` max-h-[100px]  overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked(taskId) && 'text-gray-600 line-through'}`}>
           {children}
         </p>
-        <p className={`text-[10px] text-left ${isChecked(taskId) && 'text-gray-600'}`}>
-          {date}
-        </p>
+          <p className={`text-[10px] text-left text-gray-600`}>
+            <span className="text-black">set at</span> {formatDate(currentTask.date)}
+          </p>
+          { currentTask?.completedDate &&
+          <p className={`text-green-700 text-[10px] text-left`}>
+            <span className="text-black">completed at</span> {formatDate(currentTask.completedDate)}
+          </p>}
+
       </div>
       <Button
         onClick={()=>deleteTask(taskId)}

@@ -1,4 +1,4 @@
-import { describe, it, beforeEach, expect, afterEach } from "vitest";
+import { describe, it, beforeEach, expect, afterEach,vi } from "vitest";
 import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import TaskContainer from "./TaskContainer";
@@ -34,7 +34,6 @@ function TestWrapper() {
           tasks={tasks}
           setTasks={setTasks}
           taskId={task.id}
-          date={formatDate(task.date)}
         >
           {task.task}
         </TaskContainer>
@@ -57,10 +56,26 @@ describe("test suite: TaskContainer", () => {
     expect(screen.getByText(/finish react testing video/i)).toBeInTheDocument();
   });
 
-  it("renders task dates", () => {
+  it("renders task date", () => {
     expect(screen.getByText("10:36AM 02/09/2026")).toBeInTheDocument();
     expect(screen.getByText("11:14AM 02/10/2026")).toBeInTheDocument();
   });
+  
+  it("renders task completed date if task completed", () => {
+      vi.useFakeTimers();
+      const fakeDate = new Date('2026-02-09T10:38:00');
+      vi.setSystemTime(fakeDate);
+
+      const checkboxButtons = screen.getAllByRole('checkbox');
+
+      expect(screen.queryByText(/10:38AM 09\/02\/2026/i)).not.toBeInTheDocument();
+
+      fireEvent.click(checkboxButtons[0]);
+
+      expect(screen.getByText(/10:38AM 09\/02\/2026/i)).toBeInTheDocument();
+
+      vi.useRealTimers();
+    });
 
   it("checkbox checked after click", () => {
     const checkboxButtons = screen.getAllByRole('checkbox')
