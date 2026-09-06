@@ -65,7 +65,32 @@ describe("test suite: TaskContainer", () => {
   it("checkbox checked after click", () => {
     const checkboxButtons = screen.getAllByRole('checkbox')
     fireEvent.click(checkboxButtons[0]);
+
     expect(checkboxButtons[0]).toBeChecked();
+
+    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    expect(tasks[0].isChecked).toBe(true);
+
+  });
+
+  it("uncheck the checkbox if checkbox checked", () => {
+  const checkboxButtons = screen.getAllByRole('checkbox')
+  fireEvent.click(checkboxButtons[0]);
+
+  expect(checkboxButtons[0]).toBeChecked();
+
+  const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  expect(tasks[0].isChecked).toBe(true);
+
+  fireEvent.click(checkboxButtons[0]);
+
+  expect(checkboxButtons[0]).not.toBeChecked();
+  
+  const newTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+  expect(newTasks[0].isChecked).toBe(false);
+
+
   });
 
   it("delete item after click delete button ", () => {
