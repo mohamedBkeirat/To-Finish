@@ -6,6 +6,7 @@ type ButtonProps = {
   imgClassName?: string;
   imgSrc:string,
   disabled?:boolean
+  alt?:string
 };
 
 export default function Button({
@@ -13,7 +14,8 @@ export default function Button({
   className,
   imgClassName,
   imgSrc,
-  disabled
+  disabled,
+  alt
 }: ButtonProps) {
   return (
     <button
@@ -27,6 +29,7 @@ export default function Button({
       <img
         className={twMerge("icon", imgClassName)}
         src={imgSrc}
+        alt={alt}
       />
     </button>
   );

@@ -54,7 +54,7 @@ export default function TaskContainer({
   }
 
   return (
-    <div className={`task-container hover-mode ${ isChecked(taskId) && ' !bg-yellow-100 '}`}>
+    <div data-testid='task-container' className={`task-container hover-mode ${ isChecked(taskId) && ' !bg-yellow-100 '}`}>
       <input onClick={()=>handleCheckState(taskId)} checked={isChecked(taskId)} type="checkbox" className="h-[15px] w-[15px]" />
 
 
@@ -63,7 +63,7 @@ export default function TaskContainer({
           {children}
         </p>
           <p className={`text-[10px] text-left text-gray-600`}>
-            <span className="text-black">set at</span> {formatDate(currentTask.date)}
+            <span className="text-black">seted at</span> {formatDate(currentTask.date)}
           </p>
           { currentTask?.completedDate &&
           <p className={`text-green-700 text-[10px] text-left`}>

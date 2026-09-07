@@ -16,9 +16,9 @@ export default function AddMode({tasks,setTasks}:addModeProps){
   const [taskValue,setTaskValue] = React.useState('')
   const [taskDescriptionValue,settaskDescriptionValue] = React.useState('')
 
-  function handleToggle(){
-      setIsClick(!isClicked)
-  }
+function handleToggle(){
+    setIsClick(!isClicked)
+}
 function isValue() {
   return taskValue.trim() !== "" ;
 }
@@ -43,21 +43,24 @@ function isValue() {
   return(
     <>
       {isClicked &&
-      <div className="blur-container">
-        <div className='add-container'>
+      <div className="blur-container" data-testid='blur-container' >
+        <div className='add-mode-container' data-testid='add-mode-container'>
           <textarea 
           onKeyDown={e=> {if(e.key === 'Enter'){addTask()}}}
           value={taskValue}
           onChange={(e)=>{setTaskValue(e.target.value)}}
           placeholder='Task'
           className='textarea hover-mode' />
+
           <textarea 
           value={taskDescriptionValue} 
           onChange={(e)=>{settaskDescriptionValue(e.target.value)}} 
-          placeholder='Descrption' 
+          placeholder='Description' 
           className='!text-[13px] textarea hover-mode' />
+
           <Button 
           imgSrc={"/images/icons/check.png"}
+          alt="Save task"
           onClick={addTask}
           disabled={!isValue()}
           className={`${!isValue()? 'cursor-not-allowed opacity-50' : 'hover-mode active-mode'} h-[40px] m-[2px] ml-auto`} />
@@ -68,6 +71,7 @@ function isValue() {
       imgSrc={"/images/icons/plus.png"}
       imgClassName={`${isClicked && 'rotate-45'}`}
       onClick={handleToggle}
+      alt="Add task"
       className='fixed right-10 bottom-10 hover-mode active-mode' />
     </>		
 )

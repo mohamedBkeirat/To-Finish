@@ -22,7 +22,7 @@
 .task-container{
   @apply  flex min-h-[45px] w-full rounded-[12px] border-[1px] p-[5px] items-center bg-yellow-200 
 }
-.add-container{
+.add-mode-container{
   @apply grid grid-cols-[1fr] grid-rows-[1fr_2fr_1fr] h-[180px] w-[600px] rounded-[12px] p-[5px] bg-yellow-100 border-2 border-dashed mb-[100px]
 }
 .blur-container{
