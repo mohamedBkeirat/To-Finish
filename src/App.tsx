@@ -14,8 +14,14 @@ return (
 			<SidebarHeader />
 			<MainHeader />
 			<Sidebar />
-			<Main tasks={tasks} setTasks={setTasks} />
-			<AddMode tasks={tasks} setTasks={setTasks} />
+			<Main 			
+			tasks={tasks}
+			setTasks={setTasks}
+			/>
+			<AddMode 
+			tasks={tasks}
+			setTasks={setTasks}
+			/>
 		</div>
 )
 

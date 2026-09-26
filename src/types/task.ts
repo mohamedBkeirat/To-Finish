@@ -6,5 +6,6 @@ export type Task = {
   id: string;
   date: Dayjs|string;
   isChecked:boolean
-  completedDate?:Dayjs|string
+  completedDate:Dayjs|string|null
+  isEditing?:boolean
 };
