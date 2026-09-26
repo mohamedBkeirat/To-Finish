@@ -59,9 +59,9 @@ export default function EditMode({
     <>
       {isEditing(taskId) && (
         <>
-          <div onClick={()=>handleEditToggle({taskId,setTasks})} 
-          className="hover-mode flex flex-col w-fulld rounded-[12px] p-[5px] bg-yellow-200 z-20">
-            <div className='gap-1 flex flex-col w-full z-30'>
+          <div 
+          className="flex flex-col w-fulld rounded-[12px] p-[5px] bg-yellow-200">
+            <div className='gap-1 flex flex-col w-full'>
               <div className=' flex h-full gap-1 '>
                 <Button
                 onClick={()=>handleEditToggle({taskId,setTasks})}
@@ -82,7 +82,7 @@ export default function EditMode({
                   className="textarea w-full hover-mode"
                 />
               </div>
-              <div className=' flex gap-1 z-30'>
+              <div className=' flex gap-1'>
                <Button
                   onClick={()=>deleteTask({taskId,tasks,setTasks})}
                   imgSrc="/images/icons/trash.png"

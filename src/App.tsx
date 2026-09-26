@@ -5,10 +5,12 @@ import Sidebar from './components/Sidebar';
 import MainHeader from './components/header/MainHeader';
 import AddMode from './components/AddMode';
 import React from 'react';
+import type { Task } from './types/task';
 
 export default function App(){
 
-	const [tasks,setTasks]= React.useState(JSON.parse(localStorage.getItem('tasks') || '[]'))
+	const [tasks,setTasks]= React.useState<Task[]>(JSON.parse(localStorage.getItem('tasks') || '[]'))
+	console.log(tasks)
 return (
 		<div className='app-layout'>
 			<SidebarHeader />
