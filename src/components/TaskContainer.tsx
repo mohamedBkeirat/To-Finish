@@ -49,11 +49,11 @@ export default function TaskContainer({
       ${ isChecked() && ' !bg-yellow-100 '}
       `}>
       <div className="flex p-[6px]">
-        <input onClick={()=>handleCheckState(taskId)} checked={isChecked(taskId)} type="checkbox" className="h-[25px] w-[17px] rounded-[12px]" />
+        <input onClick={()=>handleCheckState(taskId)} checked={isChecked()} type="checkbox" className="h-[25px] w-[17px] rounded-[12px]" />
       </div>
       <div className="flex w-full h-full justify-between" onClick={()=>handleEditToggle({taskId, setTasks})}>
       <div>
-        <p className={` max-h-[100px]  overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked(taskId) && 'text-gray-600 line-through'}`}>
+        <p className={`max-h-[100px] overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked() && 'text-gray-600 line-through'}`}>
           {children}
         </p>
           <p className={`text-[10px] text-left text-gray-600`}>
@@ -68,7 +68,7 @@ export default function TaskContainer({
         <Button
           onClick={()=>deleteTask({taskId,tasks,setTasks})}
           imgSrc="/images/icons/trash.png"
-          className="!ml-auto !h-full !w-[35px] hover-mode active-mode"
+          className="!h-[40px] self-center !w-[40px] hover-mode active-mode"
         />
     </div>
     </div>

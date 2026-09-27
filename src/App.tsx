@@ -10,8 +10,7 @@ import type { Task } from './types/task';
 export default function App(){
 
 	const [tasks,setTasks]= React.useState<Task[]>(JSON.parse(localStorage.getItem('tasks') || '[]'))
-	console.log(tasks)
-return (
+	return (
 		<div className='app-layout'>
 			<SidebarHeader />
 			<MainHeader />

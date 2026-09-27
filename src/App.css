@@ -7,14 +7,14 @@
 .app-layout{
   @apply  grid grid-cols-[1fr_3.5fr] grid-rows-[60px_1fr] w-full h-screen overflow-hidden;
 }
-.hover-mode{
-  @apply hover:cursor-pointer hover:bg-yellow-200 
+.hover-mode:hover {
+  @apply bg-yellow-200 scale-[1.005];
 }
-.active-mode {
-  @apply active:cursor-default active:bg-yellow-300 active:border-double
+.active-mode:active {
+  @apply cursor-default bg-yellow-300 scale-[0.9];
 }
 .icon{
-  @apply w-[30px] h-[30px] object-contain
+  @apply w-[20px] h-[30px] object-contain
 }
 .main-container{
   @apply flex border-t-[1px] h-screen p-[8px] pt-[10px] flex-col gap-[6px] overflow-y-auto

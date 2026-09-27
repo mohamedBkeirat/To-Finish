@@ -49,24 +49,37 @@ function isValue() {
       <div className='flex justify-center items-center absolute w-screen h-screen'>
         <div className='flex z-50 gap-1 flex-col h-[180px] w-[600px] rounded-[12px] p-[5px] bg-yellow-100  mb-[100px]' data-testid='add-mode-container'>
           <textarea 
-          onKeyDown={e=> {if(e.key === 'Enter'){addTask()}}}
+          onKeyDown={e=> {
+            if(e.key === 'Enter')
+              {addTask()}
+            if (e.key === "Escape"){
+                handleToggle()
+              }
+          }}
           value={taskValue}
           onChange={(e)=>{setTaskValue(e.target.value)}}
           placeholder='Task'
-          className='textarea hover-mode' />
+          className='textarea !text-[16px] hover-mode' />
           <div className=' flex h-full gap-1 '>
             <textarea 
             value={descriptionValue} 
             onChange={(e)=>{setdescriptionValue(e.target.value)}} 
+            onKeyDown={e=> {
+              if(e.key === 'Enter')
+                {addTask()}
+              if (e.key === "Escape"){
+                  handleToggle()
+                }
+            }}
             placeholder='Description' 
-            className='!text-[13px] w-full textarea hover-mode' />
+            className='!text-[13px] text-gray-700 w-full textarea hover-mode' />
 
             <Button 
             imgSrc={"/images/icons/check.png"}
             alt="Save task"
-            onClick={addTask}
-            disabled={!isValue()}
-            className={`${!isValue()? 'cursor-not-allowed opacity-50' : 'hover-mode active-mode'} h-full mt-auto`} />
+            onClick={()=>addTask()}
+            disabled={isValue()}
+            className={`${!isValue() && '!cursor-not-allowed opacity-50' } hover-mode active-mode mt-auto`} />
           </div>
         </div>
       </div>
@@ -75,10 +88,10 @@ function isValue() {
       }
       <Button 
       imgSrc={"/images/icons/plus.png"}
-      imgClassName={`${isClicked && 'rotate-45'}`}
+      imgClassName={`${isClicked && 'rotate-45'}!h-[25px] !w-[25px]`}
       onClick={handleToggle}
       alt="Add task"
-      className='fixed right-10 z-50 bottom-10 hover-mode active-mode' />
+      className='fixed !h-[50px] !w-[50px] right-10 z-50 bottom-10 hover-mode active-mode' />
     </>		
 
 )

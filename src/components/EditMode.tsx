@@ -33,21 +33,24 @@ export default function EditMode({
   function isValueChanged() {
     return taskInputValue.trim() !== taskValue || descriptionInputValue.trim() !== descriptionValue;
   }
+  function isValue() {
+    return taskInputValue.trim() !== ''
+  }
 
-  function isEditing(itemId: string) {
+  function isEditing() {
     return tasks.some(
-      (task) => task.id === itemId && task.isEditing
+      (task) => task.id === taskId && task.isEditing
     );
   }
 
-  function EditTask(itemId: string) {
-    if (!isValueChanged()) {
+  function EditTask() {
+    if (!isValueChanged()||!isValue()) {
         return;
       }
 
     const newTasks = 
     tasks.map((task) =>
-        task.id === itemId
+        task.id === taskId
           ? { ...task, isEditing: !task.isEditing, task: taskInputValue, description:descriptionInputValue }
           : task
       )
@@ -57,49 +60,62 @@ export default function EditMode({
 
   return (
     <>
-      {isEditing(taskId) && (
+      {isEditing() && (
         <>
           <div 
-          className="flex flex-col w-fulld rounded-[12px] p-[5px] bg-yellow-200">
+          className="flex flex-col w-full rounded-[12px] p-[5px] bg-yellow-200">
             <div className='gap-1 flex flex-col w-full'>
-              <div className=' flex h-full gap-1 '>
+              <div className=' flex h-[40px] gap-1'>
                 <Button
                 onClick={()=>handleEditToggle({taskId,setTasks})}
                 imgSrc="/images/icons/plus.png"
-                className="h-full !w-[35px] hover-mode active-mode"
+                className="hover-mode active-mode"
                 imgClassName='rotate-45'
                 />
                 <textarea
                   onKeyDown={(e) => {
+                    if (e.key === "Escape"){
+                        handleEditToggle({taskId,setTasks})
+                      }
                     if (e.key === "Enter") {
                       e.preventDefault();
-                      handleEditToggle({taskId,setTasks});
+                      EditTask();
                     }
                   }}
                   value={taskInputValue}
                   onChange={(e) => setTaskInputValue(e.target.value)}
                   placeholder="Task"
-                  className="textarea w-full hover-mode"
+                  className="textarea !text-[16px] h-full w-full hover-mode"
                 />
               </div>
-              <div className=' flex gap-1'>
+              <div className='flex h-[40px] gap-1'>
                <Button
                   onClick={()=>deleteTask({taskId,tasks,setTasks})}
                   imgSrc="/images/icons/trash.png"
-                  className=" h-full !w-[35px] hover-mode active-mode"
+                  className="hover-mode active-mode"
                 />
                   <textarea
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape"){
+                        handleEditToggle({taskId,setTasks})
+                      }
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        EditTask();
+                      }
+                    }}
                     value={descriptionInputValue}
-                    onChange={(e) => setDescriptionInputValue(e.target.value)}
+                    onChange={(e) => 
+                      setDescriptionInputValue(e.target.value)}
                     placeholder="Description"
-                    className="!text-[13px] w-full textarea hover-mode"
+                    className="!text-[13px] text-gray-700 !h-full !overflow-hidden  w-full textarea hover-mode"
                   />
                 <Button 
                 imgSrc={"/images/icons/check.png"}
-                onClick={()=>EditTask(taskId)}
+                onClick={()=>EditTask()}
                 alt="Save task"
                 disabled={!isValueChanged()}
-                className={`${!isValueChanged()? 'cursor-not-allowed opacity-50' : 'hover-mode active-mode'} h-full !ml-auto !w-[35px]`} />
+                className={`${!isValueChanged() || !isValue() && '!cursor-not-allowed opacity-50' } hover-mode active-mode`} />
               </div>
               <div className='w-full'>
                 <p className={`text-[10px] text-left text-gray-600`}>
