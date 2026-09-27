@@ -16,11 +16,14 @@ export default function AddMode({
   const [taskValue,setTaskValue] = React.useState('')
   const [descriptionValue,setdescriptionValue] = React.useState('')
   const [isClicked , setIsClick] = React.useState(false)
-function handleToggle(){
-    setIsClick(!isClicked)
-}
-function isValue() {
-  return taskValue.trim() !== "" ;
+  function handleToggle(){
+      setIsClick(!isClicked)
+  }
+  function isValue() {
+    return taskValue.trim() !== "" ;
+  }
+  function isAnyTask(){
+    return tasks.length === 0
 }
 
   function addTask(){
@@ -86,6 +89,7 @@ function isValue() {
       </>
   
       }
+      {isAnyTask() && <img className='[@media(max-height:300px)]:hidden fixed max-md:left-auto max-[300px]:hidden max-md:top-auto max-md:w-[240px] right-33 z-50 bottom-30'  src='/images/icons/add-task.svg' />}
       <Button 
       imgSrc={"/images/icons/plus.png"}
       imgClassName={`${isClicked && 'rotate-45'}!h-[25px] !w-[25px]`}

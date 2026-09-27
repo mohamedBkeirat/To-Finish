@@ -22,6 +22,7 @@ export default function Main({
 		return tasks.every(task => task.isChecked);
 	}
 
+
 	return(
 		<div className='main-container'>
 				{tasks.map(task=>( !task.isChecked && !task.isEditing ? 
