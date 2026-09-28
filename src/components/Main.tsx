@@ -27,6 +27,7 @@ export default function Main({
 		<div className='main-container'>
 				{tasks.map(task=>( !task.isChecked && !task.isEditing ? 
 					<TaskContainer 
+					description={task.description}
 					tasks={tasks}
 					setTasks={setTasks}
 					key={task.id}
@@ -50,6 +51,7 @@ export default function Main({
 				{isAnyChecked() && !isAllChecked() && <div className='bg-black h-[1px] mt-[10px]' />}
 				{tasks.map(task=>( task.isChecked && !task.isEditing ?
 					<TaskContainer 
+					description={task.description}
 					tasks={tasks}
 					setTasks={setTasks}
 					key={task.id}

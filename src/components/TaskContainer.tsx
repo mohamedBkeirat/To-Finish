@@ -12,11 +12,12 @@ type TaskContainerProps = {
   tasks: Task[];
   setTasks: Dispatch<SetStateAction<Task[]>>
   taskId:string
+  description:string
 };
 
 export default function TaskContainer({
   
-  children,tasks,setTasks,taskId
+  children,tasks,setTasks,taskId,description
 }: TaskContainerProps) {
 
   const currentTask = tasks.find(task=>task.id === taskId)
@@ -51,18 +52,21 @@ export default function TaskContainer({
       <div className="flex p-[6px]">
         <input onClick={()=>handleCheckState(taskId)} checked={isChecked()} type="checkbox" className="h-[25px] w-[17px] rounded-[12px]" />
       </div>
-      <div className="flex w-full h-full justify-between" onClick={()=>handleEditToggle({taskId, setTasks})}>
+      <div className="flex w-full h-full justify-between z-2" onClick={()=>handleEditToggle({taskId, setTasks})}>
       <div>
-        <p className={`max-h-[100px] overflow-auto max-w-[450px] break-words text-[18px] text-left ${isChecked() && 'text-gray-600 line-through'}`}>
+        <p className={`line-clamp-1 max-w-[450px] break-words text-[18px] text-left ${isChecked() && 'text-gray-600 line-through'}`}>
           {children}
         </p>
-          <p className={`text-[10px] text-left text-gray-600`}>
-            <span className="text-black">set sat</span> {formatDate(currentTask.date)}
+          <p className="line-clamp-1 max-w-[450px] break-words text-left text-[13px] text-gray-600">
+            {description}
           </p>
-          { currentTask?.completedDate &&
-          <p className={`text-green-700 text-[10px] text-left`}>
-            <span className="text-black">completed at</span> {formatDate(currentTask.completedDate)}
-          </p>}
+        <p className={`text-[10px] text-left text-gray-600`}>
+          <span className="text-black">set at:</span> {formatDate(currentTask.date)}
+        </p>
+        { currentTask?.completedDate &&
+        <p className={`text-green-700 text-[10px] text-left`}>
+          <span className="text-black">completed at:</span> {formatDate(currentTask.completedDate)}
+        </p>}
 
       </div>
         <Button

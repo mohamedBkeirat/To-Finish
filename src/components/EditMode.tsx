@@ -43,6 +43,13 @@ export default function EditMode({
     );
   }
 
+  function isChecked() {
+    return tasks.some(
+      (task) => task.id === taskId && task.isChecked
+    );
+  }
+
+
   function EditTask() {
     if (!isValueChanged()||!isValue()) {
         return;
@@ -63,9 +70,8 @@ export default function EditMode({
       {isEditing() && (
         <>
           <div 
-          className="flex flex-col w-full rounded-[12px] p-[5px] bg-yellow-200">
-            <div className='gap-1 flex flex-col w-full'>
-              <div className=' flex h-[40px] gap-1'>
+          className={`${isEditing() && isChecked() ? 'bg-yellow-100' : 'bg-yellow-200'} flex flex-col max-h-[500px] w-full rounded-[12px] p-[10px]`}>
+              <div className='flex'>
                 <Button
                 onClick={()=>handleEditToggle({taskId,setTasks})}
                 imgSrc="/images/icons/plus.png"
@@ -85,37 +91,36 @@ export default function EditMode({
                   value={taskInputValue}
                   onChange={(e) => setTaskInputValue(e.target.value)}
                   placeholder="Task"
-                  className="textarea !text-[16px] h-full w-full hover-mode"
+                  className="textarea h-[40px] w-full hover-mode"
                 />
               </div>
-              <div className='flex h-[40px] gap-1'>
-               <Button
+              <div className='flex'>
+                <textarea
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape"){
+                      handleEditToggle({taskId,setTasks})
+                    }
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      EditTask();
+                    }
+                  }}
+                  value={descriptionInputValue}
+                  onChange={(e) => 
+                    setDescriptionInputValue(e.target.value)}
+                  placeholder="Description"
+                  className="textarea w-full h-[100px] !text-[13px] text-gray-700 hover-mode" />
+                <Button
                   onClick={()=>deleteTask({taskId,tasks,setTasks})}
                   imgSrc="/images/icons/trash.png"
-                  className="hover-mode active-mode"
+                  className="hover-mode active-mode mt-auto"
                 />
-                  <textarea
-                    onKeyDown={(e) => {
-                      if (e.key === "Escape"){
-                        handleEditToggle({taskId,setTasks})
-                      }
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        EditTask();
-                      }
-                    }}
-                    value={descriptionInputValue}
-                    onChange={(e) => 
-                      setDescriptionInputValue(e.target.value)}
-                    placeholder="Description"
-                    className="!text-[13px] text-gray-700 !h-full !overflow-hidden  w-full textarea hover-mode"
-                  />
                 <Button 
                 imgSrc={"/images/icons/check.png"}
                 onClick={()=>EditTask()}
                 alt="Save task"
                 disabled={!isValueChanged()}
-                className={`${!isValueChanged() || !isValue() && '!cursor-not-allowed opacity-50' } hover-mode active-mode`} />
+                className={`${!isValueChanged() || !isValue()? "!cursor-not-allowed opacity-50": "hover-mode active-mode"} mt-auto `} />
               </div>
               <div className='w-full'>
                 <p className={`text-[10px] text-left text-gray-600`}>
@@ -125,9 +130,7 @@ export default function EditMode({
                 <p className={`text-green-700 text-[10px] text-left`}>
                   <span className="text-black">completed at</span> {formatDate(completedDate)}
                 </p>}
-              </div>
-            </div>
-            
+              </div>            
           </div>            
 
           </>

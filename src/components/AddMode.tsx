@@ -50,7 +50,7 @@ export default function AddMode({
       <>
       <div className="absolute z-40 w-screen h-screen bg-gray-500/50" onClick={handleToggle} data-testid='blur-container' />
       <div className='flex justify-center items-center absolute w-screen h-screen'>
-        <div className='flex z-50 gap-1 flex-col h-[180px] w-[600px] rounded-[12px] p-[5px] bg-yellow-100  mb-[100px]' data-testid='add-mode-container'>
+        <div className='flex z-50 gap-1 flex-col h-[180px] w-[600px] rounded-[12px] p-[10px] bg-yellow-200  mb-[100px]' data-testid='add-mode-container'>
           <textarea 
           onKeyDown={e=> {
             if(e.key === 'Enter')
@@ -81,15 +81,17 @@ export default function AddMode({
             imgSrc={"/images/icons/check.png"}
             alt="Save task"
             onClick={()=>addTask()}
-            disabled={isValue()}
-            className={`${!isValue() && '!cursor-not-allowed opacity-50' } hover-mode active-mode mt-auto`} />
+            disabled={!isValue()}
+            className={`${!isValue()? "!cursor-not-allowed opacity-50": "hover-mode active-mode"} mt-auto `} />
           </div>
         </div>
       </div>
       </>
   
       }
-      {isAnyTask() && <img className='[@media(max-height:300px)]:hidden fixed max-md:left-auto max-[300px]:hidden max-md:top-auto max-md:w-[240px] right-33 z-50 bottom-30'  src='/images/icons/add-task.svg' />}
+      {isAnyTask() && <img className='
+      [@media(max-height:300px)]:hidden fixed max-md:left-auto max-[300px]:hidden
+       max-md:top-auto max-md:w-[240px] right-33 z-50 bottom-30'  src='/images/icons/add-task.svg' />}
       <Button 
       imgSrc={"/images/icons/plus.png"}
       imgClassName={`${isClicked && 'rotate-45'}!h-[25px] !w-[25px]`}

@@ -23,7 +23,7 @@
   @apply  flex min-h-[45px] w-full rounded-[12px] border-[1px] p-[5px] items-center bg-yellow-200 
 }
 .textarea{
-  @apply resize-none p-2 break-words hover:!cursor-text rounded-lg focus:bg-yellow-200 border focus:border-2 text-[16px]
+  @apply resize-none p-2 break-words hover:!cursor-text bg-yellow-100/50 rounded-lg shadow-md p-1 m-1 text-[16px]
 }
 .sidebar-container{
   @apply h-screen border-r-[1px] overflow-y-auto border-t-[1px]

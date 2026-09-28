@@ -22,7 +22,7 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       className={twMerge(
-        "w-[40px] h-[40px] shrink-0 flex rounded-[12px] border-[1px] justify-center items-center bg-yellow-100 ",
+        "w-[40px] h-[40px] shrink-0 flex bg-yellow-100/50 rounded-lg shadow-md p-1 m-1 b justify-center items-center",
         className
       )}
     >
